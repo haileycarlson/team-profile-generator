@@ -23,7 +23,7 @@ describe('Engineer', () => {
       expect(engineer.getRole()).toEqual('engineer')
     })
 
-    it('Should throw an error if providen no arguments', () => {
+    it('Should throw an error if provided no arguments', () => {
       const en = () => new engineer()
       // Checks if the right error is given
       expect(en).toThrow()
@@ -66,7 +66,7 @@ describe('Engineer', () => {
         "Expecten parameter 'email' to be a non-empty string",
       )
       // Checks if the right error is given
-      expect(cb).toThrowError(err)
+      expect(en).toThrowError(err)
     })
     it("Should throw an error if 'github' is not a string", () => {
         const en = () => new engineer('Troy', 4, 'email@email.com', 23)
@@ -75,7 +75,7 @@ describe('Engineer', () => {
           "Expecten parameter 'github' to be a non-empty string",
         )
         // Checks if the right error is given
-        expect(cb).toThrowError(err)
+        expect(en).toThrowError(err)
       })
   })
 })

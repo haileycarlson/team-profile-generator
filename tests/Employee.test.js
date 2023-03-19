@@ -64,7 +64,7 @@ describe('Employee', () => {
         "Expected parameter 'email' to be a non-empty string",
       )
       // Checks if the right error is given
-      expect(cb).toThrowError(err)
+      expect(ed).toThrowError(err)
     })
   })
 })
