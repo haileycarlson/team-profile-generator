@@ -3,7 +3,7 @@ const Engineer = require('../lib/Engineer')
 describe('Engineer', () => {
   describe('Initialization', () => {
     it('Returns engineers name, id, email, and github', () => {
-      const engineer = new engineer('Troy', 4, 'email@email.com', 'lisaKjones')
+      const engineer = new Engineer('Troy', 4, 'email@email.com', 'lisaKjones')
 
       // Check to see if new object has the correct properties
       expect(engineer.name).toEqual('Troy')
@@ -13,7 +13,7 @@ describe('Engineer', () => {
     })
 
     it('Has functions that return accurate information', () => {
-      const engineer = new engineer('Troy', 4, 'email@email.com', 'lisaKjones')
+      const engineer = new Engineer('Troy', 4, 'email@email.com', 'lisaKjones')
 
       // Check to see if the correct properties are given back
       expect(engineer.getName()).toEqual('Troy')
@@ -24,13 +24,13 @@ describe('Engineer', () => {
     })
 
     it('Should throw an error if provided no arguments', () => {
-      const en = () => new engineer()
+      const en = () => new Engineer()
       // Checks if the right error is given
       expect(en).toThrow()
     })
 
     it("Should throw an error if 'name' is not a string", () => {
-      const en = () => new engineer(5, 4, 'email@email.com', 'lisaKjones')
+      const en = () => new Engineer(5, 4, 'email@email.com', 'lisaKjones')
       // Defines the error message that should be thrown
       const err = new Error(
         "Expecten parameter 'name' to be a non-empty string",
@@ -40,7 +40,7 @@ describe('Engineer', () => {
     })
 
     it("Should throw an error if 'id' is not a number", () => {
-      const en = () => new engineer('Troy', '4', 'email@email.com', 'lisaKjones')
+      const en = () => new Engineer('Troy', '4', 'email@email.com', 'lisaKjones')
       // Defines the error message that should be thrown
       const err = new Error(
         "Expecten parameter 'id' to be a non-negative number",
@@ -50,7 +50,7 @@ describe('Engineer', () => {
     })
 
     it("Should throw an error if 'id' is less than 0", () => {
-      const en = () => new engineer('Troy', -4, 'email@email.com', 'lisaKjones')
+      const en = () => new Engineer('Troy', -4, 'email@email.com', 'lisaKjones')
       // Defines the error message that should be thrown
       const err = new Error(
         "Expecten parameter 'id' to be a non-negative number",
@@ -60,7 +60,7 @@ describe('Engineer', () => {
     })
 
     it("Should throw an error if 'email' is not a string", () => {
-      const en = () => new engineer('Troy', 4, 44, 'lisaKjones')
+      const en = () => new Engineer('Troy', 4, 44, 'lisaKjones')
       // Defines the error message that should be thrown
       const err = new Error(
         "Expecten parameter 'email' to be a non-empty string",
@@ -69,7 +69,7 @@ describe('Engineer', () => {
       expect(en).toThrowError(err)
     })
     it("Should throw an error if 'github' is not a string", () => {
-        const en = () => new engineer('Troy', 4, 'email@email.com', 23)
+        const en = () => new Engineer('Troy', 4, 'email@email.com', 23)
         // Defines the error message that should be thrown
         const err = new Error(
           "Expecten parameter 'github' to be a non-empty string",
