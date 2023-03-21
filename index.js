@@ -4,6 +4,8 @@ const Intern = require('./lib/Intern')
 const inquirer = require('inquirer')
 const fs = require('fs')
 
+const employees = []
+
 const addManager = [
   {
     type: 'input',
@@ -71,53 +73,76 @@ const addIntern = [
 ]
 
 function questions() {
-inquirer
-    .prompt(addManager)
-    .then((res) => {
-        inquirer
-        .prompt([
+  inquirer.prompt(addManager).then((res) => {
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'choice',
+          choices: [
             {
-                type: 'list',
-                name: 'choice',
-                choices: [
-                    {
-                        name: 'Add Manager',
-                        value: 'ADD_MANAGER'
-                    },
-                    {
-                        name: 'Add Engineer',
-                        value: 'ADD_ENGINEER'
-                    },
-                    {
-                        name: 'Add Intern',
-                        value: 'ADD_INTERN'
-                    },
-                    {
-                        name: 'End',
-                        value: 'END'
-                    },
-                ]
-            }
-        ])
-        .then((res) => {
-            if (choice === 'ADD_MANAGER') {
-                addManager()
-                questions()
+              name: 'Add Manager',
+              value: 'ADD_MANAGER',
+            },
+            {
+              name: 'Add Engineer',
+              value: 'ADD_ENGINEER',
+            },
+            {
+              name: 'Add Intern',
+              value: 'ADD_INTERN',
+            },
+            {
+              name: 'End',
+              value: 'END',
+            },
+          ],
+        },
+      ])
+      .then((res) => {
+        if (choice === 'ADD_MANAGER') {
+          addManager()
+          const manager = new Manager(
+            questions.managerName,
+            questions.managerId,
+            questions.managerEmail,
+            questions.managerOffice,
+          )
+          employees.push(manager)
+          questions()
+        }
+        if (choice === 'ADD_ENGINEER') {
+          addEngineer()
+          const engineer = new Engineer(
+            questions.engineerName,
+            questions.engineerId,
+            questions.engineerEmail,
+            questions.engineerGithub,
+          )
+          employees.push(engineer)
+          questions()
+        }
+        if (choice === 'ADD_INTERN') {
+          addIntern()
+          const intern = new Intern(
+            questions.internName,
+            questions.internId,
+            questions.internEmail,
+            questions.internOffice,
+          )
+          employees.push(intern)
+          questions()
+        }
+        if (choice === 'END') {
+const teamPage = genereateTeam(employees)
 
-            }
-            if (choice === 'ADD_ENGINEER') {
-                addEngineer()
-                questions()
-            }
-            if (choice === 'ADD_INTERN') {
-                addIntern()
-                questions()
-            }
-            if (choice === 'END') {
-              process.exit()
-            }
-        })
-    })
+          fs.writeFile(outputPath, render(teamPage), (err) =>
+            err ? console.error(err) : console.log('Your team has been generated!'),
+          )
+          process.exit()
+        }
+      })
+  })
 }
 
 questions()
