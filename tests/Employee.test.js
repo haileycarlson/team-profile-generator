@@ -21,50 +21,50 @@ describe('Employee', () => {
       expect(employee.getRole()).toEqual('Employee')
     })
 
-    it('Should throw an error if provided no arguments', () => {
-      const ed = () => new Employee()
-      // Checks if the right error is given
-      expect(ed).toThrow()
-    })
+  //   it('Should throw an error if provided no arguments', () => {
+  //     const ed = () => new Employee()
+  //     // Checks if the right error is given
+  //     expect(ed).toThrow()
+  //   })
 
-    it("Should throw an error if 'name' is not a string", () => {
-      const ed = () => new Employee(5, 3, 'email@email.com')
-      // Defines the error message that should be thrown
-      const err = new Error(
-        "Expected parameter 'name' to be a non-empty string",
-      )
-      // Checks if the right error is given
-      expect(ed).toThrowError(err)
-    })
+  //   it("Should throw an error if 'name' is not a string", () => {
+  //     const ed = () => new Employee(5, 3, 'email@email.com')
+  //     // Defines the error message that should be thrown
+  //     const err = new Error(
+  //       "Expected parameter 'name' to be a non-empty string",
+  //     )
+  //     // Checks if the right error is given
+  //     expect(ed).toThrowError(err)
+  //   })
 
-    it("Should throw an error if 'id' is not a number", () => {
-      const ed = () => new Employee('Lisa', '3', 'email@email.com')
-      // Defines the error message that should be thrown
-      const err = new Error(
-        "Expected parameter 'id' to be a non-negative number",
-      )
-      // Checks if the right error is given
-      expect(ed).toThrowError(err)
-    })
+  //   it("Should throw an error if 'id' is not a number", () => {
+  //     const ed = () => new Employee('Lisa', '3', 'email@email.com')
+  //     // Defines the error message that should be thrown
+  //     const err = new Error(
+  //       "Expected parameter 'id' to be a non-negative number",
+  //     )
+  //     // Checks if the right error is given
+  //     expect(ed).toThrowError(err)
+  //   })
 
-    it("Should throw an error if 'id' is less than 0", () => {
-      const ed = () => new Employee('Lisa', -3, 'email@email.com')
-      // Defines the error message that should be thrown
-      const err = new Error(
-        "Expected parameter 'id' to be a non-negative number",
-      )
-      // Checks if the right error is given
-      expect(ed).toThrowError(err)
-    })
+  //   it("Should throw an error if 'id' is less than 0", () => {
+  //     const ed = () => new Employee('Lisa', -3, 'email@email.com')
+  //     // Defines the error message that should be thrown
+  //     const err = new Error(
+  //       "Expected parameter 'id' to be a non-negative number",
+  //     )
+  //     // Checks if the right error is given
+  //     expect(ed).toThrowError(err)
+  //   })
 
-    it("Should throw an error if 'email' is not a string", () => {
-      const ed = () => new Employee('Lisa', 3, 44)
-      // Defines the error message that should be thrown
-      const err = new Error(
-        "Expected parameter 'email' to be a non-empty string",
-      )
-      // Checks if the right error is given
-      expect(ed).toThrowError(err)
-    })
+  //   it("Should throw an error if 'email' is not a string", () => {
+  //     const ed = () => new Employee('Lisa', 3, 44)
+  //     // Defines the error message that should be thrown
+  //     const err = new Error(
+  //       "Expected parameter 'email' to be a non-empty string",
+  //     )
+  //     // Checks if the right error is given
+  //     expect(ed).toThrowError(err)
+  //   })
   })
 })

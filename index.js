@@ -3,6 +3,9 @@ const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 const inquirer = require('inquirer')
 const fs = require('fs')
+const generateHtml = require('./src/builder.js')
+
+
 
 const employees = []
 
@@ -73,7 +76,7 @@ const addIntern = [
 ]
 
 function questions() {
-  inquirer.prompt(addManager).then((res) => {
+ 
     inquirer
       .prompt([
         {
@@ -99,50 +102,60 @@ function questions() {
           ],
         },
       ])
-      .then((res) => {
+      .then((answer) => {
+        const choice = answer.choice
         if (choice === 'ADD_MANAGER') {
-          addManager()
-          const manager = new Manager(
-            questions.managerName,
-            questions.managerId,
-            questions.managerEmail,
-            questions.managerOffice,
-          )
-          employees.push(manager)
-          questions()
+          inquirer.prompt(addManager).then((answer) => {
+            const manager = new Manager(
+              answer.managerName,
+              answer.managerId,
+              answer.managerEmail,
+              answer.managerOffice,
+            )
+            employees.push(manager)
+            questions()
+          })
         }
         if (choice === 'ADD_ENGINEER') {
-          addEngineer()
+          inquirer.prompt(addEngineer).then((answer) => {
           const engineer = new Engineer(
-            questions.engineerName,
-            questions.engineerId,
-            questions.engineerEmail,
-            questions.engineerGithub,
+            answer.engineerName,
+            answer.engineerId,
+            answer.engineerEmail,
+            answer.engineerGithub,
           )
           employees.push(engineer)
           questions()
+          })
         }
         if (choice === 'ADD_INTERN') {
-          addIntern()
+          inquirer.prompt(addIntern).then((answer) => {
           const intern = new Intern(
-            questions.internName,
-            questions.internId,
-            questions.internEmail,
-            questions.internOffice,
+            answer.internName,
+            answer.internId,
+            answer.internEmail,
+            answer.internOffice,
           )
           employees.push(intern)
           questions()
+          })
         }
         if (choice === 'END') {
-const teamPage = genereateTeam(employees)
-
-          fs.writeFile(outputPath, render(teamPage), (err) =>
-            err ? console.error(err) : console.log('Your team has been generated!'),
+        
+          fs.writeFile('./dist/team.html', generateHtml(employees), (err) =>
+            err
+              ? console.error(err)
+              : console.log('Your team has been generated!'),
           )
-          process.exit()
+        
         }
       })
-  })
+      .catch((err) => {
+        if (err) {
+          throw err;
+        }
+      });
+  // })
 }
 
 questions()
